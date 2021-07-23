@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+	<title>Algorithm Analyser	</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet/less" type="text/css" href="styles.less" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/21dd03b4bb.js" crossorigin="anonymous"></script>
+  <style>
+    a:link, a:visited {
+      color: white;
+      padding: 1vh 1.5vw;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    a:hover, a:active {
+      background-color: cyan;
+      color: #262626;
+    }
+    
+  </style>
+</head>
+<body style="background-color: #262626;">
+  <div id="header">
+	  <div class="container">
+	  	<div class="row">
+	  		<div id="bubble" class="col-sm"><a href="#">Bubble</a></div>
+	  		<div id="selection" class="col-sm"><a href="#">Selection</a></div>
+	  		<div id="insertion" class="col-sm"><a href="#">Insertion</a></div>
+		  	<div id="quick" class="col-sm"><a href="#">Quick</a></div>
+		  	<div id="merge" class="col-sm"><a href="#">Merge</a></div>
+        <div id="heap" class="col-sm"><a href="#">Heap</a></div>
+        <div id="logout" data-toggle="toolkit" title="Signout" align="right"><i class="fas fa-sign-out-alt col-sm"></i></div>
+		  </div>	
+	  </div>
+  </div>
+
+  <div id="screen" class="container">
+    <div id="digits" class="row" style=" padding-top:2vh;">
+      
+    </div>
+    <div id="bar-graph" class="row" style="height:90%; padding-bottom:8vh;  padding-top:2vh;">
+      
+    </div>
+    
+  </div>  
+
+  <div id="footer" class="container">
+    <div id="sortingType" style="padding-bottom:2vw; text-align:center; color:white; font-size:3.5vh"></div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label><strong>Enter Array Inputs:</strong></label>
+        <input type="text" id="input-num" maxlength="29" placeholder=" (1-100) Max 10 Digits">
+        <button type="button" id="btn-submit" class="btn btn-dark btn-sm" >Submit</button>
+        <button style="margin-left: 1vw;" type="button" id="btn-clear" class="btn btn-dark btn-sm" >Clear</button>
+      </div>
+      <div class="col-sm-4"></div>
+      <div id="start" align="right" id="btn-start" class="col-sm-1"><button type="button" class="btn btn-primary">Start</button></div>
+      <div id="btn-reset" class="col-sm-1 "><button type="button" class="btn btn-primary">Reset</button></div>
+      
+    </div>
+    <!--<div id="demo" style="color: white"></div>-->
+  </div>
+
+  <script>
+
+      var c,count,multiplier;
+      var arr;
+      var flag = false;
+      window.onload = (event) => {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        c = url.searchParams.get("sorting");
+        document.getElementById("sortingType").innerHTML = c + " SORT";
+      };
+
+      document.getElementById("logout").addEventListener("click",function(){
+        if(confirm("Are you sure you want to Signout!"))
+        {
+          location.replace("/");
+        }
+      })
+
+      document.getElementById("bubble").addEventListener("click", function(){
+        window.location = 'main?sorting=BUBBLE';
+      });
+
+      document.getElementById("selection").addEventListener("click", function(){
+        window.location = 'main?sorting=SELECTION';
+      });
+
+      document.getElementById("insertion").addEventListener("click", function(){
+        window.location = 'main?sorting=INSERTION';
+      });
+
+      document.getElementById("merge").addEventListener("click", function(){
+        window.location = 'main?sorting=MERGE';
+      });
+
+      document.getElementById("quick").addEventListener("click", function(){
+        window.location = 'main?sorting=QUICK';
+      });
+
+      document.getElementById("heap").addEventListener("click", function(){
+        window.location = 'main?sorting=HEAP';
+      });
+
+      document.getElementById("btn-clear").addEventListener("click",function(){
+        var x= document.getElementById("input-num").value="";
+        document.getElementById("bar-graph").innerHTML = "";
+        document.getElementById("digits").innerHTML = "";
+      });
+      
+      //Creating Bar Graphs
+      document.getElementById("btn-submit").addEventListener("click",function(){
+          flag = true;
+          document.getElementById("bar-graph").innerHTML = "";
+          document.getElementById ("digits").innerHTML = "";
+          count=0;
+          var max = 1;
+          multiplier = 1;
+          var x= document.getElementById("input-num").value;  //return string
+          arr=x.split(" ");    //split but still string
+
+        
+          for(var i=0;arr[i];i++){
+            if(parseInt(arr[i]) && parseInt(arr[i])<=100 && count<10)
+            {
+              arr[i] = parseInt(arr[i]);    //string to int
+              count= count+1;
+              if(arr[i]>max)
+              {
+                max = arr[i];
+              }
+            }
+            else
+            {
+              if(parseInt(arr[i])>100)
+              {
+                alert("Please enter integers between (1-100) seperated by spaces!");
+                count = 0;
+                break;
+              }
+              else if(count>10)
+              {
+                alert("Maximum integers allowed are 10 seperated by spaces!");
+                count = 0;
+                break;
+              }
+              else
+              {
+                alert("Please enter integer input only seperated by spaces!");
+                count = 0;
+                break;
+              }
+            }
+          }
+
+          for(var i=2;;i++)
+          {
+            if((max*i)<=100)
+            {
+              multiplier = i;
+            }
+            else
+            {
+              break;
+            }
+          }
+          
+          for(var i=0; i<count;i++){
+            var div = document.createElement('div');
+            div.className= 'col-sm-1';
+            div.id = "pos-" + String(i);                   //still a prblm
+            div.style.color = "black";
+            div.style.height = arr[i]*multiplier + "%";
+            div.style.backgroundColor= "#80ffff";
+            div.style.marginLeft= "1.05vw";
+            document.getElementById('bar-graph').appendChild(div);
+
+            var div2 = document.createElement('div');
+            div2.className= 'col-sm-1';
+            div2.id = "pos-" + String(i) + "-head";
+            div2.innerHTML = arr[i];
+            div2.style.color = "white";
+            div2.style.fontSize= "3vh";
+            div2.style.marginLeft= "1.05vw";
+            document.getElementById('digits').appendChild(div2);
+          }
+      });
+
+        document.getElementById("btn-reset").addEventListener("click",function(){
+          flag = true;
+          document.getElementById("bar-graph").innerHTML = "";
+          document.getElementById ("digits").innerHTML = "";
+          count=0;
+          var max = 1;
+          multiplier = 1;
+          var x= document.getElementById("input-num").value;  //return string
+          arr=x.split(" ");    //split but still string
+
+        
+          for(var i=0;arr[i];i++){
+            if(parseInt(arr[i]) && parseInt(arr[i])<=100 && count<10)
+            {
+              arr[i] = parseInt(arr[i]);    //string to int
+              count= count+1;
+              if(arr[i]>max)
+              {
+                max = arr[i];
+              }
+            }
+            else
+            {
+              if(parseInt(arr[i])>100)
+              {
+                alert("Please enter integers between (1-100) seperated by spaces!");
+                count = 0;
+                break;
+              }
+              else if(count>10)
+              {
+                alert("Maximum integers allowed are 10 seperated by spaces!");
+                count = 0;
+                break;
+              }
+              else
+              {
+                alert("Please enter integer input only seperated by spaces!");
+                count = 0;
+                break;
+              }
+            }
+          }
+
+          for(var i=2;;i++)
+          {
+            if((max*i)<=100)
+            {
+              multiplier = i;
+            }
+            else
+            {
+              break;
+            }
+          }
+          
+          for(var i=0; i<count;i++){
+            var div = document.createElement('div');
+            div.className= 'col-sm-1';
+            div.id = "pos-" + String(i);                   //still a prblm
+            div.style.color = "black";
+            div.style.height = arr[i]*multiplier + "%";
+            div.style.backgroundColor= "#80ffff";
+            div.style.marginLeft= "1.05vw";
+            document.getElementById('bar-graph').appendChild(div);
+
+            var div2 = document.createElement('div');
+            div2.className= 'col-sm-1';
+            div2.id = "pos-" + String(i) + "-head";
+            div2.innerHTML = arr[i];
+            div2.style.color = "white";
+            div2.style.fontSize= "3vh";
+            div2.style.marginLeft= "1.05vw";
+            document.getElementById('digits').appendChild(div2);
+          }
+      });
+
+
+      //Start Button Functionality
+      document.getElementById("start").addEventListener("click",function(){
+        var sortType = document.getElementById("sortingType").innerHTML;
+        
+        if(sortType == "SELECTION SORT")
+        {
+          selection();
+        }
+        else
+        {
+          bubble();
+        }
+      });
+
+      //sleep function
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+
+      //swaping
+      function swap(arr, pos1, pos2){
+
+        var obj1 = document.getElementById("pos-" + String(pos1));
+        var obj2 = document.getElementById("pos-" + String(pos2));
+        var obj3 = document.getElementById("pos-" + String(pos1) + "-head");
+        var obj4 = document.getElementById("pos-" + String(pos2) + "-head");
+
+        //for testing
+        console.log("swap " + arr[pos1] + " with " + arr[pos2]);
+
+        // if i swap the divs than no need of these 4 lines....but change the id's instead
+        obj1.style.height = arr[pos2]*multiplier + "%";
+        obj2.style.height = arr[pos1]*multiplier + "%";
+        obj3.innerHTML = String(arr[pos2]);
+        obj4.innerHTML = String(arr[pos1]);
+
+        // obj1.id = "pos-" + String(pos2);
+        // obj2.id = "pos-" + String(pos1);
+
+        var k = arr[pos1];
+        arr[pos1] = arr[pos2];
+        arr[pos2] = k;
+                   
+      };
+
+      //shifting items for insertion sort
+      // function shift(arr, pos1, pos2){
+
+      //   var obj2 = document.getElementById("pos-" + String(pos2));                   //for j+1
+      //   var obj4 = document.getElementById("pos-" + String(pos2) + "-head");         //for j+1
+
+      //   console.log("shift " + arr[pos1] + " to " + arr[pos2]);
+
+      //   obj2.style.height = arr[pos1]*multiplier + "%";
+      //   obj4.innerHTML = String(arr[pos1]);
+
+      //   arr[pos2] = pos1;
+      // }        
+
+      //Sorting algorithms
+
+      //1.) Selection Sort
+      async function selection(){
+        flag = false;
+        var pos2;
+        for(var i=0;i<count;i++)
+        {
+          pos2 = i;
+          for(var j=i+1;j<count;j++)
+          {
+            if(flag)
+            {
+              return;
+            }
+            if(arr[pos2]>arr[j])
+            {     
+              pos2 = j;
+            }
+          }
+          if(pos2 != i)
+          {
+            swap(arr,i,pos2);
+            await sleep(1000);
+          }
+        }
+      }
+
+      //2.) Bubble Sort
+      async function bubble(){
+        flag = false;
+        var i,j;
+        for(i=count;i>1;i--)
+        {
+          for(j=0;j<i-1;j++)
+          {
+            if(flag)
+            {
+              return;
+            }
+            if(arr[j]>arr[j+1])
+            {
+              swap(arr,j,j+1);
+              await sleep(1000);
+            }
+          }
+        }
+        
+      }
+      
+  </script>
+</body>
+</html>

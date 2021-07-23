@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Algorithm Analyser
+	</title>
+  <link rel="stylesheet" href="/static/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Goblin+One&family=Itim&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Itim&family=Permanent+Marker&family=Shadows+Into+Light&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+
+<style>
+  .circle {
+    position:relative;
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%; 
+    cursor: pointer;
+  }
+
+  .center-circle{
+    position:relative;
+    height: 12vw;
+    width: 12vw;
+    border-radius: 50%;
+    
+  }
+
+  .circle-p{
+    font-family: 'Roboto Slab', serif;
+    color:white;
+    padding-top:35%;
+    font-size: 2vw;
+  }
+
+  .header{
+  background-image: linear-gradient(#006666, #262626);
+  font-size:3vh;
+  color: white;
+  }
+
+  footer{
+    padding: 4vh 0 2vh 0;
+    color: white;
+    background-color: #262626;
+    font-size:3vh;
+    width:100%;
+    bottom: 0;
+    //position: fixed;
+  }
+   .db{
+     font-size: 3vh;
+   }
+ 
+  a:link, a:visited {
+  color: white;
+  padding: 1vh 1.5vw;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  }
+  a:hover, a:active {
+    background-color: cyan;
+    color: #262626;
+  }
+  
+</style>
+
+</head>
+
+<body>
+  <!-- Header Part -->
+  <div class="header">
+	  	<div class="row" style="padding-top: 3.5vh;">
+        <div class="col-1"></div>
+	  		<div class="col-8" style="font-family: 'Lobster', cursive; letter-spacing: 3px; font-size: 4.7vh;">
+        Algorithm Visualizer
+        </div>
+        <div class="col-1 db" id="uname"><a href="register">Register</a></div>
+	  		<div class="col-1 db" id="logout"><a href="login">Login</a></div>
+		  	<!--<div class="col-1 db"><a href="#">Logout</a></div>
+        <div class="col-1"></div>-->
+		  </div>
+
+      <div class="row" style="padding-top:0.65vh; padding-bottom:4vh;">
+        <div class="col-1"></div>
+        <div class="col-6" style=" font-size: 3vh;">Enjoy the new way of Studying Algorithm!</div>
+        <div class="col-5"></div>
+      </div>
+  </div>
+
+  <!-- Body part -->
+  <div style="padding-top: 5vh; padding-bottom: 5vh; background-color: #262626">
+    <div style="background-color:#843b62; float: right; right: 51%;"  class="circle" id="bubble" >
+      <p align="center" class="circle-p">Bubble</p>
+    </div>
+    <div class="circle" style="left:51%;background-color:#ffB6c1" id="selection">
+      <p align="center" class="circle-p">Selection</p>
+    </div>
+    <div style="display: inline-block; left: 32%;background-color: #e6b3ff;" class="circle" id="insertion">
+      <p align="center" class="circle-p">Insertion</p>
+    </div>
+    <div style="display: inline-block; left: 34%; background-color: #8ae1b3;" class="center-circle">
+      <p align="center" class="circle-p">Sorting</p>
+    </div>
+    <div class="circle" style="display: inline-block; left: 36%;background-color: #e6b3ff" id="merge">
+      <p align="center" class="circle-p">Merge</p>
+    </div>
+    <div></div>
+    <div style="background-color:#ffB6c1 ;float:right; right: 51%" class="circle" id="quick"> 
+      <p align="center" class="circle-p">Quick</p>
+    </div>
+    <div class="circle" style="left:51%; background-color:#843b62;" id="heap">
+      <p align="center" class="circle-p">Heap</p>
+    </div>
+  </div> 
+
+  <footer>
+    <div class="row" align="center">
+      <div class="col" style="font-size: 3.5vh; padding-bottom: 1vh;">Software Engineering Project</div>
+    </div>
+    <div class="row" align="center">
+      <div class="col-3"></div>
+      <div class="col-2" align="center">Made By : </div>
+      <div class="col-2" align="center">Ritisha Gupta</div>
+      <div class="col-2" align="center">Harsh Gupta</div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row" align="center">
+      <div class="col-3"></div>
+      <div class="col-2" align="center">Contact : </div>
+      <div class="col-2" align="center">
+        <a href="https://www.linkedin.com/in/ritisha-gupta-b507531a3/">Linkedin</a>
+      </div>
+      <div class="col-2" align="center">
+        <a href="https://www.linkedin.com/in/harsh-gupta-609340197/">Linkedin</a>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </footer> 
+
+  <script>
+
+    window.onload = (event) => {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        c = url.searchParams.get("username");
+        if(c)
+        {
+          document.getElementById("uname").innerHTML = "<a href=" + "#" +">" + c + "</a>";
+          document.getElementById("logout").innerHTML = "<a href=" + "/" + ">Logout</a>";
+        }
+        
+      };
+
+    document.getElementById("bubble").addEventListener("click", function(){
+      console.log("sort 1 clicked!");
+      window.location = 'main?sorting=BUBBLE';
+    });
+
+    document.getElementById("selection").addEventListener("click", function(){
+      console.log("sort 2 clicked!");
+      window.location = 'main?sorting=SELECTION';
+    });
+
+    document.getElementById("insertion").addEventListener("click", function(){
+      console.log("sort 3 clicked!");
+      window.location = 'main?sorting=INSERTION';
+    });
+
+    document.getElementById("merge").addEventListener("click", function(){
+      console.log("sort 4 clicked!");
+      window.location = 'main?sorting=MERGE';
+    });
+
+    document.getElementById("quick").addEventListener("click", function(){
+      console.log("sort 5 clicked!");
+      window.location = 'main?sorting=QUICK';
+    });
+
+    document.getElementById("heap").addEventListener("click", function(){
+      console.log("sort 6 clicked!");
+      window.location = 'main?sorting=HEAP';
+    });
+  </script>
+
+</body>
+</html>
