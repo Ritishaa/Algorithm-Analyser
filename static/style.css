@@ -1,0 +1,41 @@
+
+#header{
+  //background-color: #006666;
+  //background-image: linear-gradient(#007acc, #46d2d2);
+  background-image: linear-gradient(#006666, #262626);
+  padding: 2vw 0 2vw 0;
+  font-size: 1.7vw;
+  color: white;
+}
+
+#screen{
+  height: 67vh;
+  border: 0.2vw solid white;//black;
+  //background-color:  #f2f2f2;//white;;
+  //margin-bottom: 1vw;
+  position: relative;
+}
+
+#graph{
+  margin-top: 20vh;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -40%);
+}
+
+label{
+  color: white;
+}
+
+a:link, a:visited {
+  color: white;
+  padding: 1vh 1.5vw;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+a:hover, a:active {
+  background-color: cyan;
+  color: #262626;
+}
