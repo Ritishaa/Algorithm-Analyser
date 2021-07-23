@@ -8,3 +8,5 @@ Here are some screenshots of the project:-
 
 ![image](https://user-images.githubusercontent.com/65445733/126768086-8388e959-9e6b-4df9-bbfb-29f86e945eab.png)
 
+![image](https://user-images.githubusercontent.com/65445733/126768287-3b8e3f6d-c949-45a8-a7e3-4fd3e75dd3b0.png)
+
