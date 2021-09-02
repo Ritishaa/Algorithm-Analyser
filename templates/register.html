@@ -21,7 +21,7 @@
         height: 63vh;
         width: 27vw;
         border-radius: 3vh;
-        background-color: #80ffff;
+        background-color: #B7E1D8;
         margin: auto;
       }
       #btn-submit{
@@ -35,8 +35,9 @@
         display: inline-block;
       }
       a:hover, a:active {
-        background-color: cyan;
+        background-color: #B7E1D8;
         color: #262626;
+        border-radius: 3vw;
       }
       #alert, #alert-id, #vaild-ip{
         color: red;
@@ -94,10 +95,15 @@
 
   </div>
 
+  <!-- <script data-main = "libs/main" src = "libs/require.js"></script> -->
   <script>
     document.getElementById("btn-submit").addEventListener("click",function(e){
 
       e.preventDefault();
+
+      // import { createRequire } from 'module';
+      // const require = createRequire(import.meta.url);
+      // var crypto = require('crypto');
 
       document.getElementById("alert-id").innerHTML="";
       document.getElementById("alert").innerHTML="";
@@ -105,7 +111,6 @@
       var username= document.getElementById("input-id").value;
       var pass= document.getElementById("input-pass").value;
       var cpass= document.getElementById("input-cpass").value;
-      
 
       if(username == "" || pass == "" || cpass == "")
       {
@@ -118,6 +123,11 @@
         document.getElementById("alert").innerHTML="Password dosen't match!";
         return;
       }
+
+      // hash = crypto.getHashes();
+      // console.log(hash);
+      // var hashPwd = crypto.createHash('sha256').update(pass).digest('hex');
+      // console.log(hashPwd);
 
       // document.getElementById("form1").submit();
 
@@ -136,7 +146,8 @@
           else
           {
             username = data.username;
-            location.replace('/?username=@' + username)
+            // location.replace('/?username=@' + username)
+            window.location.replace("https://Minor-Project-Engineering.harancho.repl.co/login");
           }
           
         }

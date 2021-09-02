@@ -19,7 +19,6 @@
     height: 10vw;
     width: 10vw;
     border-radius: 50%; 
-    cursor: pointer;
   }
 
   .center-circle{
@@ -64,12 +63,12 @@
   display: inline-block;
   }
   a:hover, a:active {
-    background-color: cyan;
+    background-color: #B7E1D8;
     color: #262626;
+    border-radius: 3vw;
   }
   
 </style>
-
 </head>
 
 <body>
@@ -95,9 +94,11 @@
 
   <!-- Body part -->
   <div style="padding-top: 5vh; padding-bottom: 5vh; background-color: #262626">
-    <div style="background-color:#843b62; float: right; right: 51%;"  class="circle" id="bubble" >
+    <div class="circle" style="background-color:#843b62; float: right; right: 51%;"  id="bubble" >
       <p align="center" class="circle-p">Bubble</p>
     </div>
+
+    
     <div class="circle" style="left:51%;background-color:#ffB6c1" id="selection">
       <p align="center" class="circle-p">Selection</p>
     </div>
@@ -159,32 +160,35 @@
 
     document.getElementById("bubble").addEventListener("click", function(){
       console.log("sort 1 clicked!");
-      window.location = 'main?sorting=BUBBLE';
+
+      // add tooltip in this and following 5 buttons
+
+      // window.location = 'main?sorting=BUBBLE';
     });
 
     document.getElementById("selection").addEventListener("click", function(){
       console.log("sort 2 clicked!");
-      window.location = 'main?sorting=SELECTION';
+      // window.location = 'main?sorting=SELECTION';
     });
 
     document.getElementById("insertion").addEventListener("click", function(){
       console.log("sort 3 clicked!");
-      window.location = 'main?sorting=INSERTION';
+      // window.location = 'main?sorting=INSERTION';
     });
 
     document.getElementById("merge").addEventListener("click", function(){
       console.log("sort 4 clicked!");
-      window.location = 'main?sorting=MERGE';
+      // window.location = 'main?sorting=MERGE';
     });
 
     document.getElementById("quick").addEventListener("click", function(){
       console.log("sort 5 clicked!");
-      window.location = 'main?sorting=QUICK';
+      // window.location = 'main?sorting=QUICK';
     });
 
     document.getElementById("heap").addEventListener("click", function(){
       console.log("sort 6 clicked!");
-      window.location = 'main?sorting=HEAP';
+      // window.location = 'main?sorting=HEAP';
     });
   </script>
 

@@ -22,7 +22,7 @@
 			height: 55vh;
 			width: 27vw;
 			border-radius: 3vh;
-			background-color: #80ffff;
+			background-color: #B7E1D8;
 			margin: auto;
 			margin-top: 5vh;
 		}
@@ -42,8 +42,9 @@
 
 		a:hover,
 		a:active {
-			background-color: cyan;
+			background-color: #B7E1D8;
 			color: #262626;
+      border-radius: 3vw;
 		}
 
 		#alert {
@@ -95,7 +96,9 @@
   <script>
     document.getElementById("submit").addEventListener("click",function(e){
 
+      
       e.preventDefault();
+      // const crypto = require('crypto'),
       
       var pass= document.getElementById("input-pass").value;
       var username= document.getElementById("input-id").value;
@@ -124,7 +127,10 @@
           else
           {
             username = data.username;
-            location.replace('/?username=@' + username)
+            var token = data.token;
+            document.cookie = 'token=' + token;
+            // location.replace('/?username=@' + username)
+            window.location.replace("https://Minor-Project-Engineering.harancho.repl.co/main?sorting=BUBBLE");
           }
           
         }

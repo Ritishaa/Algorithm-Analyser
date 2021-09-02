@@ -17,8 +17,9 @@
       display: inline-block;
     }
     a:hover, a:active {
-      background-color: cyan;
+      background-color: #B7E1D8;
       color: #262626;
+      border-radius: 3vw;
     }
     
   </style>
@@ -27,13 +28,15 @@
   <div id="header">
 	  <div class="container">
 	  	<div class="row">
+        <div class="col-sm-1"></div>
 	  		<div id="bubble" class="col-sm"><a href="#">Bubble</a></div>
 	  		<div id="selection" class="col-sm"><a href="#">Selection</a></div>
 	  		<div id="insertion" class="col-sm"><a href="#">Insertion</a></div>
-		  	<div id="quick" class="col-sm"><a href="#">Quick</a></div>
+		  	<!--<div id="quick" class="col-sm"><a href="#">Quick</a></div>
 		  	<div id="merge" class="col-sm"><a href="#">Merge</a></div>
-        <div id="heap" class="col-sm"><a href="#">Heap</a></div>
+        <div id="heap" class="col-sm"><a href="#">Heap</a></div>-->
         <div id="logout" data-toggle="toolkit" title="Signout" align="right"><i class="fas fa-sign-out-alt col-sm"></i></div>
+        <div class="col-sm-1"></div>
 		  </div>	
 	  </div>
   </div>
@@ -53,7 +56,7 @@
     <div class="row">
       <div class="col-sm-6">
         <label><strong>Enter Array Inputs:</strong></label>
-        <input type="text" id="input-num" maxlength="29" placeholder=" (1-100) Max 10 Digits">
+        <input type="text" id="input-num" maxlength="29" placeholder=" (1-100) Max 10 Digits with spaces">
         <button type="button" id="btn-submit" class="btn btn-dark btn-sm" >Submit</button>
         <button style="margin-left: 1vw;" type="button" id="btn-clear" class="btn btn-dark btn-sm" >Clear</button>
       </div>
@@ -74,12 +77,20 @@
         var url_string = window.location.href;
         var url = new URL(url_string);
         c = url.searchParams.get("sorting");
-        document.getElementById("sortingType").innerHTML = c + " SORT";
+        if(c == null)
+        {
+          document.getElementById("sortingType").innerHTML = "BUBBLE SORT"
+        } else {
+          document.getElementById("sortingType").innerHTML = c + " SORT";
+        }
+        
       };
 
       document.getElementById("logout").addEventListener("click",function(){
         if(confirm("Are you sure you want to Signout!"))
         {
+          //deleting token
+          document.cookie = 'token=;' + 'max-age = 0;';
           location.replace("/");
         }
       })
@@ -96,17 +107,13 @@
         window.location = 'main?sorting=INSERTION';
       });
 
-      document.getElementById("merge").addEventListener("click", function(){
+      /*document.getElementById("merge").addEventListener("click", function(){
         window.location = 'main?sorting=MERGE';
       });
 
       document.getElementById("quick").addEventListener("click", function(){
         window.location = 'main?sorting=QUICK';
-      });
-
-      document.getElementById("heap").addEventListener("click", function(){
-        window.location = 'main?sorting=HEAP';
-      });
+      });*/
 
       document.getElementById("btn-clear").addEventListener("click",function(){
         var x= document.getElementById("input-num").value="";
@@ -177,7 +184,7 @@
             div.id = "pos-" + String(i);                   //still a prblm
             div.style.color = "black";
             div.style.height = arr[i]*multiplier + "%";
-            div.style.backgroundColor= "#80ffff";
+            div.style.backgroundColor= "#00FFFF";
             div.style.marginLeft= "1.05vw";
             document.getElementById('bar-graph').appendChild(div);
 
@@ -274,14 +281,22 @@
       document.getElementById("start").addEventListener("click",function(){
         var sortType = document.getElementById("sortingType").innerHTML;
         
-        if(sortType == "SELECTION SORT")
-        {
-          selection();
-        }
-        else
+        if(sortType == "BUBBLE SORT")
         {
           bubble();
         }
+        else if(sortType == "SELECTION SORT")
+        {
+          selection();
+        }
+        else if(sortType == "INSERTION SORT")
+        {
+          insertion();
+        }
+        /*else if(sortType == "QUICK SORT")
+        {
+          quick(0,count-1);
+        }*/
       });
 
       //sleep function
@@ -316,20 +331,6 @@
                    
       };
 
-      //shifting items for insertion sort
-      // function shift(arr, pos1, pos2){
-
-      //   var obj2 = document.getElementById("pos-" + String(pos2));                   //for j+1
-      //   var obj4 = document.getElementById("pos-" + String(pos2) + "-head");         //for j+1
-
-      //   console.log("shift " + arr[pos1] + " to " + arr[pos2]);
-
-      //   obj2.style.height = arr[pos1]*multiplier + "%";
-      //   obj4.innerHTML = String(arr[pos1]);
-
-      //   arr[pos2] = pos1;
-      // }        
-
       //Sorting algorithms
 
       //1.) Selection Sort
@@ -339,6 +340,9 @@
         for(var i=0;i<count;i++)
         {
           pos2 = i;
+          var obj1= document.getElementById("pos-" + String(i));
+          obj1.style.backgroundColor= "#FF1E4E";
+          await sleep(1500);
           for(var j=i+1;j<count;j++)
           {
             if(flag)
@@ -353,8 +357,9 @@
           if(pos2 != i)
           {
             swap(arr,i,pos2);
-            await sleep(1000);
           }
+          var obj2= document.getElementById("pos-" + String(i));
+          obj2.style.backgroundColor= "#3498DB";
         }
       }
 
@@ -366,6 +371,9 @@
         {
           for(j=0;j<i-1;j++)
           {
+            var obj1= document.getElementById("pos-" + String(j));
+            obj1.style.backgroundColor= "#FF1E4E";
+            await sleep(1000);
             if(flag)
             {
               return;
@@ -373,12 +381,77 @@
             if(arr[j]>arr[j+1])
             {
               swap(arr,j,j+1);
-              await sleep(1000);
+              // await sleep(500);
+              obj1.style.backgroundColor= "#00FFFF";
             }
           }
+          var obj2= document.getElementById("pos-" + String(i-1));
+          obj2.style.backgroundColor= "#3498DB";
+          
         }
-        
+        var obj= document.getElementById("pos-" + String(0));
+        obj.style.backgroundColor= "#3498DB";
       }
+
+      //3) Insertion Sort
+      async function insertion(){
+        flag = false;
+        var i,j,temp;
+        var obj= document.getElementById("pos-" + String(0));
+        obj.style.backgroundColor= "#3498DB";
+        for(i=1;i<count;i++)
+        {
+          var obj= document.getElementById("pos-" + String(i));
+          obj.style.backgroundColor= "#FF1E4E";
+          await sleep(1000);
+          if(arr[i]<arr[i-1])
+          {
+            console.log(i);
+            temp=arr[i];
+            for(j=i-1;j>=0;j--)
+            {
+              if(arr[j]<temp)
+              {
+                break;
+              }
+              swap(arr,j+1,j);
+              // arr[j+1]=arr[j];
+            }
+            arr[j+1]=temp;
+            console.log("sleep");
+            // await sleep(1500);
+            console.log("finish");
+          }
+          obj.style.backgroundColor= "#3498DB";
+        }
+      }
+
+      //4) Quick Sort
+      /*async function quick(number lo, number hi){
+        number ploc;
+        if(lo<hi){
+          ploc = partition(lo,hi);
+          quick(lo,ploc-1);
+          quick(ploc+1;hi);
+        }
+      }
+
+      async function partition(var lo, var hi){
+        var pval=arr[lo];
+        var temp;
+        while(lo<hi){
+          while(lo<hi && arr[lo]=<pval) lo++;
+          while(arr[hi]>pval) hi--;
+          if(lo<hi){
+            temp=arr[lo];
+            arr[lo]=arr[hi];
+            arr[hi]=temp;
+          }
+        }
+        arr[lo]=arr[hi];
+        arr[hi]= pval;
+        return hi;
+      }*/
       
   </script>
 </body>
